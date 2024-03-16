@@ -12,7 +12,7 @@ Create a workflow .yml file in your repositories .github/workflows directory.
 
 #### `FIRST_TIME_CONTRIBUTORS`
 
-Array which contains the first time contributors
+Array which contains the first time contributors.
 
 
 ## Getting Started
