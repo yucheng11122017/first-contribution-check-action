@@ -2,9 +2,9 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const accessToken = process.env['GITHUB_TOKEN'];
 
-async function findFirstContibutors(
+async function findFirstContributors(
     client, owner, repo,
-    userNames, 
+    userNames,
     page = 1
 ) {
     const { status, data: contributors } = await client.repos.listContributors({
@@ -31,10 +31,14 @@ async function findFirstContibutors(
         if (!contributor) {
         return true;
         }
-        return contributor.contributions == 1
+        return contributor.contributions === 1
     })
 
-    return firstTimeContributors.concat(await findFirstContibutors(
+    if (contributors.length < 100) {
+        return firstTimeContributors
+    }
+
+    return firstTimeContributors.concat(await findFirstContributors(
         client,
         owner,
         repo,
@@ -52,20 +56,21 @@ async function run() {
         const owner = payload.repository.owner.login;
         const repoName = payload.repository.name;
 
-        const firstContributors = await findFirstContibutors(
-        githubClient, owner, repoName,
-        userNames
+        const firstContributors = await findFirstContributors(
+            githubClient, owner, repoName,
+            userNames
         );
 
         core.info("First time contributors");
         core.info(firstContributors.join(", "))
         exec(`echo "FIRST_TIME_CONTRIBUTORS=${firstContributors}" >> $GITHUB_OUTPUT`);
-        
+
     } catch (err) {
         core.setFailed(err.message);
     }
 }
 
 module.exports = {
-    run
+    run,
+    findFirstContributors
 }
