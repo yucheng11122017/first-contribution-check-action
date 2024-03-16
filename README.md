@@ -1,6 +1,6 @@
 # First Contribution Check Action
 
-This action checks if the author of the last commit is a new contributor of a repository.
+This action checks if any of the authors is a new contributor of a repository.
 
 ## Usage
 
@@ -10,9 +10,9 @@ Create a workflow .yml file in your repositories .github/workflows directory.
 
 ### Outputs
 
-#### `isNewContributor`
+#### `FIRST_TIME_CONTRIBUTORS`
 
-flag for filtering merged pull requests from first-time contributors.
+Array which contains the first time contributors
 
 
 ## Getting Started
@@ -31,7 +31,7 @@ jobs:
     name: A job to find if a commitor is new to contribute.
     steps:
       - name: First Contribution Check
-        uses: sukki37/first-contribution-check-action@v1.0.0
+        uses: yucheng11122017/first-contribution-check-action@v1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Print Output of Previous Step
@@ -44,7 +44,7 @@ That's it!
 To add it to your to your existing workflow, append this to your current `.yml` workflow script.
 
 ```yml
-uses: sukki37/first-contribution-check-action@v1.0.0
+uses: yucheng11122017/first-contribution-check-action@v1.0.0
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
