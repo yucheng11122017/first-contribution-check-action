@@ -1,6 +1,6 @@
 # First Contribution Check Action
 
-This action checks if any of the authors is a new contributor of a repository.
+This action checks if any of the authors is a new contributor to a repository.
 
 ## Usage
 
@@ -12,7 +12,7 @@ Create a workflow .yml file in your repositories .github/workflows directory.
 
 #### `FIRST_TIME_CONTRIBUTORS`
 
-Array which contains the first time contributors.
+Array which contains the first time contributors
 
 
 ## Getting Started
