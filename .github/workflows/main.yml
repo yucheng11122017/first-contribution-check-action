@@ -1,20 +1,17 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches:
       - main
 
 jobs:
-  build:
+  contrib-readme-job:
     runs-on: ubuntu-latest
+    name: A job to find if a commitor is new to contribute.
     steps:
-      - uses: actions/checkout@v2
-      - uses: ./
+      - name: First Contribution Check
+        uses: yucheng11122017/first-contribution-check-action@v1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+      - name: Print Output of Previous Step
+        run: |
+          echo 'first-check output is ${{ steps.first-check.outputs.FIRST_TIME_CONTRIBUTORS }}'
