@@ -60,10 +60,7 @@ async function run() {
             githubClient, owner, repoName,
             userNames
         );
-
-        core.info("First time contributors");
-        core.info(firstContributors.join(", "))
-        exec(`echo "FIRST_TIME_CONTRIBUTORS=${firstContributors}" >> $GITHUB_OUTPUT`);
+        exec(`echo "FIRST_TIME_CONTRIBUTORS=${firstContributors.toJSON()}" >> $GITHUB_OUTPUT`);
 
     } catch (err) {
         core.setFailed(err.message);
